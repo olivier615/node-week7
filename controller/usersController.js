@@ -7,9 +7,12 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
 exports.userSign_up = async (req, res, next) => {
-  let { email, password, confirmPassword, name} = req.body
+  let { email, password, confirmPassword, name } = req.body
   if (!email || !password || !confirmPassword || !name) {
     return next(appError('400', '欄位未填寫正確', next))
+  }
+  if (!validator.isLength(name.trim(), { min: 2, max: 16 })) {
+    return next(appError('400', 'name 需要 2-16 個字元', next))
   }
   if (!validator.isEmail(email)) {
     return next(appError('400', 'email 格式不正確', next))
@@ -73,23 +76,19 @@ exports.updatePassword = async (req, res, next) => {
 }
 
 exports.updateProfile = async (req, res, next) => {
-  const { name, email, photo } = req.body
-  if (!name.trim() || !email) {
-    return next(appError('400', '姓名或 email 不能為空白', next))
+  const { name, photo, gender } = req.body
+  if (!validator.isLength(name.trim(), { min: 2, max: 16 })) {
+    return next(appError(400, 'name 需要 2-16 個字元', next))
   }
-  if (!validator.isEmail(email)) {
-    return next(appError('400', 'email 格式不正確', next))
+  if (photo && !validator.isURL(photo, { protocols: ['https'] })){
+    return next(appError(400, 'image 網址不正確', next))
   }
-  const checkEmail = await User.findOne({ email })
-  if (checkEmail) {
-    return next(appError('400', '此 email 已註冊', next))
-  }
-  if (photo !== '' && photo.startsWith('https')) {
-    return next(appError('400', 'image 網址不正確', next))
+  if (!['male', 'female'].includes(gender)) {
+    return next(appError(400, 'gender 字串內容只接受 male 或 female', next))
   }
   await User.findByIdAndUpdate(req.user.id, {
     name,
-    email,
+    gender,
     photo
   })
   const editProfile = await User.findById(req.user.id)
@@ -106,5 +105,79 @@ exports.getLikeList = async (req, res, next) => {
   res.status(200).send({
     status: 'success',
     likeList
+  })
+}
+
+exports.followAnUser = async (req, res, next) => {
+  if (req.params.id === req.user.id) {
+    return next(appError(401, '不要追蹤自己辣', next))
+  }
+  await User.updateOne(
+    {
+      _id: req.user.id,
+      'following.user': {
+        $ne: req.params.id
+      }
+    },
+    {
+      $addToSet: {
+        following: {
+          user: req.params.id
+        }
+      }
+    }
+  )
+  await User.updateOne(
+    {
+      _id: req.params.id,
+      'followers.user': {
+        $ne: req.user.id
+      }
+    },
+    {
+      $addToSet: {
+        followers: {
+          user: req.user.id
+        }
+      }
+    }
+  )
+  res.status(200).json({
+    status: 'success',
+    message: '已加入追蹤'
+  })
+}
+
+exports.unFollowAnUser = async (req, res, next) => {
+  if (req.params.id === req.user.id) {
+    return next(appError(401, '何必取消追蹤自己呢?', next))
+  }
+  await User.updateOne(
+    {
+      _id: req.user.id
+    },
+    {
+      $pull: {
+        following: {
+          user: req.params.id
+        }
+      }
+    }
+  )
+  await User.updateOne(
+    {
+      _id: req.params.id
+    },
+    {
+      $pull: {
+        followers: {
+          user: req.user.id
+        }
+      }
+    }
+  )
+  res.status(200).json({
+    status: 'success',
+    message: '已取消追蹤'
   })
 }

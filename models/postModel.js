@@ -1,5 +1,6 @@
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
+const Comment = require('../models/commentsModel')
 const postSchema = new mongoose.Schema(
   {
     content: {
@@ -17,7 +18,7 @@ const postSchema = new mongoose.Schema(
     },
     image: {
       type:String,
-      default:""
+      default: ''
     },
     createdAt: {
       type: Date,
@@ -26,24 +27,30 @@ const postSchema = new mongoose.Schema(
     },
     user: {
         type: mongoose.Schema.ObjectId,
-        ref: "user", // 對應 collection 名稱
+        ref: 'user', // 對應 collection 名稱
         required: [true, '貼文 id 未填寫']
     },
     likes: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: "user"
+        ref: 'user'
       }
-    ],
-    comments: {
-      type:Number,
-      default:0
-    }
+    ]
   },
   {
-    versionKey: false
+    versionKey: false,
+    // 當使用 virtual 時，要加上以下兩行
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 )
+
+// 虛擬 comments
+postSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'post', // 對應 commentSchema 裡面的 post
+  localField: '_id' // 對應 postSchema 的 _id
+})
 
 const Post = mongoose.model('Post', postSchema)
 
