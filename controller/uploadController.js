@@ -2,9 +2,6 @@ const appError = require('../service/appError.js')
 const { ImgurClient } = require('imgur')
 
 exports.uploadPhoto = async (req, res, next) => {
-  if (!req.files.length) {
-    return next(appError(400, '未選擇檔案', next))
-  }
   // 加入環境變數
   const client = new ImgurClient({
     clientId: process.env.IMGUR_CLIENT_ID,

@@ -8,7 +8,6 @@ const uploadController = require('../controller/uploadController.js')
 const checkDimensions = require('../service/checkDimensions.js')
 
 
-router.post('/', isAuth, upload, handleErrorAsync(uploadController.uploadPhoto))
-router.post('/userAvatar', isAuth, upload, checkDimensions, handleErrorAsync(uploadController.uploadPhoto))
+router.post('/', isAuth, upload, checkDimensions, handleErrorAsync(uploadController.uploadPhoto))
 
 module.exports = router

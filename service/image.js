@@ -2,6 +2,7 @@ const multer = require('multer')
 const path = require('path')
 const appError = require("../service/appError")
 const handleErrorAsync = require("../service/handleErrorAsync")
+
 const upload = multer({
   limits: {
     fileSize: 2*1024*1024

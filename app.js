@@ -81,6 +81,11 @@ app.use((err, req, res, next) => {
     err.isOperational = true
     return resErrorProd(err, res)
   }
+  if (err.name === 'MulterError' && err.message === 'File too large') {
+    err.message = '圖片檔案限 2mb 以下'
+    err.isOperational = true
+    return resErrorProd(err, res)
+  }
   resErrorProd(err, res)
 })
 

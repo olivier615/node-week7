@@ -11,15 +11,15 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1]
   }
   if (!token) {
-    return next(appError(401,'尚未登入',next))
+    return next(appError(401,'尚未登入', next))
   }
   // 驗證 token 正確性
   const decoded = await new Promise((resolve, reject) => {
     jwt.verify(token,
       process.env.JWT_SECRET, (err, payload) => {
-        if(err){
-          reject(err)
-        }else{
+        if (err) {
+          return next(appError(400, '認證失敗，請重新登入', next))
+        } else {
           resolve(payload)
         }
       })
