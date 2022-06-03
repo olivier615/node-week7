@@ -6,6 +6,13 @@ const appError = require('../service/appError.js')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
+exports.checkUser = async (req, res, next) => {
+  res.status(200).send({
+    status: 'success',
+    message: '登入狀態正常'
+  })
+}
+
 exports.userSign_up = async (req, res, next) => {
   let { email, password, confirmPassword, name } = req.body
   if (!email || !password || !confirmPassword || !name) {
