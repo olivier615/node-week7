@@ -13,7 +13,7 @@ exports.getAllPosts = async (req, res, next) => {
     select: 'name photo'
   }).populate({
     path: 'comments',
-    select: 'comment user'
+    select: 'comment user image'
   }).sort(timeSort)
   handelSuccess(res, allPosts)
 }
