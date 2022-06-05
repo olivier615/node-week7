@@ -129,9 +129,11 @@ exports.getUserPosts = async (req, res, next) => {
     path: 'comments',
     select: 'comment user image createdAt'
   }).sort('createdAt')
+  const userData = await User.findById(user)
   res.status(200).send({
     status: 'success',
     result: posts.length,
+    userData,
     posts
   })
 }
