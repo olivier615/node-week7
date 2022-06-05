@@ -128,7 +128,7 @@ exports.getUserPosts = async (req, res, next) => {
   }).populate({
     path: 'comments',
     select: 'comment user image createdAt'
-  }).sort(timeSort)
+  }).sort('createdAt')
   res.status(200).send({
     status: 'success',
     result: posts.length,

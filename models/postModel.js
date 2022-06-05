@@ -23,7 +23,6 @@ const postSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      select: false
     },
     user: {
         type: mongoose.Schema.ObjectId,
