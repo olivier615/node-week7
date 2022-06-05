@@ -10,7 +10,7 @@ const upload = multer({
   fileFilter (req, file, cb) {
     // 取得檔案的副檔名
     const ext = path.extname(file.originalname).toLowerCase()
-    if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg') {
+    if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg' && ext !== '.gif') {
       cb(new Error('檔案格式錯誤，僅限上傳 jpg、jpeg 與 png 格式'))
     }
     cb(null, true)
