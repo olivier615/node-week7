@@ -122,6 +122,13 @@ exports.dislike = async (req, res, next) => {
 exports.getUserPosts = async (req, res, next) => {
   const user = req.params.id
   const posts = await Post.find({ user })
+  .populate({
+    path: 'user',
+    select: 'name photo'
+  }).populate({
+    path: 'comments',
+    select: 'comment user image createdAt'
+  }).sort(timeSort)
   res.status(200).send({
     status: 'success',
     result: posts.length,
