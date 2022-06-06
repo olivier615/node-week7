@@ -121,14 +121,28 @@ exports.dislike = async (req, res, next) => {
 
 exports.getUserPosts = async (req, res, next) => {
   const user = req.params.id
-  const posts = await Post.find({ user })
+  const q = req.query.q !== undefined ? {"content": new RegExp(req.query.q)} : {}
+  const timeSort = req.query.timeSort == "asc" ? "createdAt":"-createdAt"
+  console.log(q)
+  const posts = await Post.find(
+    {
+      $and: [
+        q,
+        {
+          user:{
+            $in: [user]
+            }
+        }
+      ]
+    }
+  )
   .populate({
     path: 'user',
     select: 'name photo'
   }).populate({
     path: 'comments',
     select: 'comment user image createdAt'
-  }).sort('createdAt')
+  }).sort(timeSort)
   const userData = await User.findById(user)
   res.status(200).send({
     status: 'success',
