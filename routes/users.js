@@ -12,7 +12,7 @@ router.post('/sign_in', handleErrorAsync(usersController.userSign_in))
 router.post('/updatePassword', isAuth, handleErrorAsync(usersController.updatePassword))
 router.get('/profile', isAuth, handleErrorAsync(usersController.userProfile))
 router.patch('/profile', isAuth, handleErrorAsync(usersController.updateProfile))
-router.get('/likeList', isAuth, checkParamsId, handleErrorAsync(usersController.getLikeList))
+router.get('/likeList', isAuth, handleErrorAsync(usersController.getLikeList))
 router.post('/:id/follow', isAuth, handleErrorAsync(usersController.followAnUser))
 router.delete('/:id/unFollow', isAuth, handleErrorAsync(usersController.unFollowAnUser))
 

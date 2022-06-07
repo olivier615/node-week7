@@ -19,7 +19,7 @@ exports.userSign_up = async (req, res, next) => {
     return next(appError('400', '欄位未填寫正確', next))
   }
   if (!validator.isLength(name.trim(), { min: 2, max: 16 })) {
-    return next(appError('400', 'name 需要 2-16 個字元', next))
+    return next(appError('400', '暱稱需要 2-16 個字元', next))
   }
   if (!validator.isEmail(email)) {
     return next(appError('400', 'email 格式不正確', next))
@@ -61,7 +61,8 @@ exports.userSign_in = async (req, res, next) => {
 
 exports.userProfile = async (req, res, next) => {
   const { id } = req.user
-  const user = await User.findById(id).select('+email')
+  const user = await User.findById(id)
+  .select('+email')
   handelSuccess(res, user)
 }
 
