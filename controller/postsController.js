@@ -25,6 +25,9 @@ exports.getPost = async (req, res, next) => {
   }).populate({
     path: 'user',
     select: 'name photo'
+  }).populate({
+    path: 'comments',
+    select: 'comment user image createdAt'
   })
   handelSuccess(res, post)
 }
