@@ -108,7 +108,7 @@ exports.getLikeList = async (req, res, next) => {
     likes: { $in: [req.user.id] }
   }).populate({
     path: 'user',
-    select: 'name _id'
+    select: 'name _id photo'
   })
   res.status(200).send({
     status: 'success',
