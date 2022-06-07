@@ -20,7 +20,7 @@ exports.getAllPosts = async (req, res, next) => {
 
 exports.getPost = async (req, res, next) => {
   const { id } = req.params
-  const post = await Post.find({
+  const post = await Post.findOne({
     _id: id
   }).populate({
     path: 'user',
