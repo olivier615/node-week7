@@ -1,0 +1,678 @@
+{
+	"info": {
+		"_postman_id": "f8d9ccfb-efb2-485b-9992-2f47cfc33cfb",
+		"name": "final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20188441"
+	},
+	"item": [
+		{
+			"name": "註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"汪太太\",\r\n    \"email\": \"kkhuj0t@gmail.cm\",\r\n    \"password\": \"fox00012\",\r\n    \"confirmPassword\": \"fox00012\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/sign_up",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"kkhuj0t@gmail.cm\",\r\n    \"password\": \"fox00012\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/sign_in",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"group\",\r\n    \"content\": \"唉呀我剛睡醒\",\r\n    \"image\": \"https://images.unsplash.com/photo-1487300001871-12053913095d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNsZWVwfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得所有貼文",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得單一貼文",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/629e56b05fd552bad90e3d1b",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"629e56b05fd552bad90e3d1b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "like 一則貼文",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62a0efa930c44a647fe8eb9e/likes",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62a0efa930c44a647fe8eb9e",
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dislike 一則貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62a0efa930c44a647fe8eb9e/dislikes",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62a0efa930c44a647fe8eb9e",
+						"dislikes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改貼文",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"盧太無聊了!\",\r\n    \"image\": \"https://images.unsplash.com/photo-1529088363398-8efc64a0eb95?ixlib=rb-1.2.1&raw_url=true&q=60&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDV8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62951f01cb010df8f0cd5a6a",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62951f01cb010df8f0cd5a6a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62a0efa930c44a647fe8eb9e",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62a0efa930c44a647fe8eb9e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得個人的貼文列表",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/user/62a0ef5230c44a647fe8eb9a",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"user",
+						"62a0ef5230c44a647fe8eb9a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更改密碼",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"fox00012\",\r\n    \"confirmPassword\": \"fox00012\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/updatePassword",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"updatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得個人訊息",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改個人訊息",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"汪太太\",\r\n    \"photo\": \"https://images.unsplash.com/photo-1556713304-e5ac0f02e516?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHNsZWVwfGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60\",\r\n    \"gender\": \"female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/profile",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得 like 貼文列表",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/likeList",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"likeList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "上傳圖片",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/User/Desktop/gaga.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/upload?type=avatar",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "avatar"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "加入追蹤",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/629c692dd27d7125d5cc7f49/follow",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"629c692dd27d7125d5cc7f49",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取消追蹤",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users/6294bdcd1933f583a84be2a3/unFollow",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users",
+						"6294bdcd1933f583a84be2a3",
+						"unFollow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增留言",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"林太上藥房\",\r\n    \"image\": \"https://images.unsplash.com/photo-1653856687792-a311a084b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/6294bcd11933f583a84be29a/comment",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"6294bcd11933f583a84be29a",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除一則留言",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62a0f0c530c44a647fe8ebeb/comment",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62a0f0c530c44a647fe8ebeb",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改留言",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"comment\": \"林太上藥房買安眠藥\",\r\n        \"image\": \"https://images.unsplash.com/photo-1653856687792-a311a084b9ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/posts/62a0f0da30c44a647fe8ebf3/comment",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"posts",
+						"62a0f0da30c44a647fe8ebf3",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "確認登入狀態",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fathomless-earth-71463.herokuapp.com/api/users",
+					"protocol": "https",
+					"host": [
+						"fathomless-earth-71463",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
